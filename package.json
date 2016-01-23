@@ -1,0 +1,32 @@
+{
+  "name": "koa-rest-api",
+  "version": "1.0.0",
+  "description": "A basic CRUD app built on Koa",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/un-express-yourself/koa-rest-api.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/un-express-yourself/koa-rest-api/issues"
+  },
+  "homepage": "https://github.com/un-express-yourself/koa-rest-api#readme",
+  "dependencies": {
+    "koa": "^1.1.2",
+    "koa-bodyparser": "^2.0.1",
+    "koa-route": "^2.4.2",
+    "mongoose": "^4.3.6"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "gulp": "^3.9.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.3.4"
+  }
+}
