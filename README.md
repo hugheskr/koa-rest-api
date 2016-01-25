@@ -8,11 +8,11 @@ However it uses Koa's framework instead of Vanilla js or Express.
 
 The biggest differences between KOA and Express:
 
-    -KOA uses generators instead of callbacks to manage async  
-    -KOA does not have any middleware bundled
-    -KOA is a very small framework
-    -KOA does not have a separate req and res object, they are wrapped in 'this' and are 
-     accessible with various methods like this.body.
+- KOA uses generators instead of callbacks to manage async  
+- KOA does not have any middleware bundled
+- KOA is a very small framework
+- KOA does not have a separate req and res object, they are wrapped in 'this' and are 
+  accessible with various methods like this.body.
 
 Generators behave similarly to promises to manage async functions.  And here is what a generator looks like:
 ```
