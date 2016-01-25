@@ -13,12 +13,18 @@ module.exports = exports = router
   var exists = yield Movie.findOne({
     title: this.request.body.title
   });
-  if (exists === undefined) {
+
+  if (exists === null) {
     var newMovie = new Movie(this.request.body);
     var inserted = yield newMovie.save();
-    this.body = inserted;
+    this.body = {
+      title: inserted.title,
+      genre: inserted.genre
+    }
   } else {
-    this.body = "An event with that name already exists";
+    this.body = {
+      title: "An event with that name already exists"
+    }
   }
 })
 // Update movie based on title
@@ -28,14 +34,18 @@ module.exports = exports = router
   var updated = yield Movie.update({
     title: this.params.title
   });
-  upated = 'Successful PUT';
-  this.body = updated;
+  this.body = {
+    msg: 'Successful PUT'
+  };
+ 
 })
 // Delete Movie based on title
 .delete('/movie/:title', function * () {
   var deleted = yield Movie.remove({
     title: this.params.title
   });
-  deleted = 'Successful DELETE';
-  this.body = deleted;
+
+  this.body = {
+    msg: 'Successful DELETE'
+  };
 });

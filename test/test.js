@@ -12,18 +12,19 @@ describe('The Movie API', () => {
     mongoose.connection.db.dropDatabase(() => {
       done();
     })
+
   });
 
   it('POST should create a movie with a post', (done) => {
     chai.request('localhost:3000')
       .post('/movie')
       .send({
-        title: 'a trial movie'
+        title: 'a trial movie',
+        genre: 'drama'
       })
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
-        //expect(res.body.title).to.eql('a trial movie');
         expect(res.body).to.have.property('title');
         expect(res.body).to.have.property('genre');
         done();
@@ -47,36 +48,34 @@ describe('The Movie API', () => {
         .get('/movie')
         .end((err, res) => {
           expect(err).to.eql(null);
-          //console.log(res);
           expect(Array.isArray(res.body)).to.eql(true);
           done();
         });
     });
+    it('PUT should be able to update a movie', (done) => {
+      chai.request('localhost:3000')
+        .put('/movie/' + this.testMovie.title)
+        .send({
+          title: 'new movie title',
+          genre: 'new genre type'
+        })
+        .end((err, res) => {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          expect(res.body.msg).to.eql('Successful PUT');
+          done();
+        })
+    });
 
-    // it('PUT should be able to update a movie', (done) => {
-    //   chai.request('localhost:3000')
-    //     .put('/movie/' + this.testMovie.title)
-    //     .send({
-    //       title: 'new movie title',
-    //       genre: 'new genre type'
-    //     })
-    //     .end((err, res) => {
-    //       expect(err).to.eql(null);
-    //       expect(res).to.have.status(200);
-    //       expect(res.body).to.eql('Successful PUT');
-    //       done();
-    //     });
-    // });
-
-    // it('DELETE should be able to delete a movie', (done) => {
-    //   chai.request('localhost:3000')
-    //     .delete('/movie/' + this.testMovie.title)
-    //     .end((err, res) => {
-    //       expect(err).to.eql(null);
-    //       expect(res.body).to.eql('Successful DELETE');
-    //       expect(res).to.have.status(200);
-    //       done();
-    //     });
-    // });
+    it('DELETE should be able to delete a movie', (done) => {
+      chai.request('localhost:3000')
+        .delete('/movie/' + this.testMovie.title)
+        .end((err, res) => {
+          expect(err).to.eql(null);
+          expect(res.body.msg).to.eql('Successful DELETE');
+          expect(res).to.have.status(200);
+          done();
+        })
+    });
   });
 });
