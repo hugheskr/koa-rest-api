@@ -12,13 +12,15 @@ describe('The Movie API', () => {
     mongoose.connection.db.dropDatabase(() => {
       done();
     })
+
   });
 
   it('POST should create a movie with a post', (done) => {
     chai.request('localhost:3000')
       .post('/movie')
       .send({
-        title: 'a trial movie'
+        title: 'a trial movie',
+        genre: 'drama'
       })
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -47,7 +49,6 @@ describe('The Movie API', () => {
         .get('/movie')
         .end((err, res) => {
           expect(err).to.eql(null);
-          console.log(res);
           expect(Array.isArray(res.body)).to.eql(true);
           done();
         });
@@ -63,7 +64,8 @@ describe('The Movie API', () => {
         .end((err, res) => {
           expect(err).to.eql(null);
           expect(res).to.have.status(200);
-          expect(res.body).to.eql('Successful PUT');
+
+          expect(res.body.msg).to.eql('Successful PUT');
           done();
         })
     });
@@ -73,7 +75,7 @@ describe('The Movie API', () => {
         .delete('/movie/' + this.testMovie.title)
         .end((err, res) => {
           expect(err).to.eql(null);
-          expect(res.body).to.eql('Successful DELETE');
+          expect(res.body.msg).to.eql('Successful DELETE');
           expect(res).to.have.status(200);
           done();
         })
