@@ -11,7 +11,8 @@ The biggest differences between KOA and Express:
     -KOA uses generators instead of callbacks to manage async  
     -KOA does not have any middleware bundled
     -KOA is a very small framework
-    -KOA does not have a separate req and res object, they are wrapped in 'this' and are             accessible with various methods like this.body.
+    -KOA does not have a separate req and res object, they are wrapped in 'this' and are 
+     accessible with various methods like this.body.
 
 Generators behave similarly to promises to manage async functions.  And here is what a generator looks like:
 ```
@@ -96,8 +97,8 @@ Javascript 401 course at Code Fellows.
 
 
 ##Sources
-[Koa: Understanding the next-generation web framework for Node.js](https://www.youtube.com/watch?v=RVxx2T7SPw8)
-[Getting Started with Koa, part 1 - Generators](https://blog.risingstack.com/introduction-to-koa-generators/)
+- [Koa: Understanding the next-generation web framework for Node.js](https://www.youtube.com/watch?v=RVxx2T7SPw8)
+- [Getting Started with Koa, part 1 - Generators](https://blog.risingstack.com/introduction-to-koa-generators/)
 
 ## License
 
