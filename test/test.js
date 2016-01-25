@@ -1,17 +1,19 @@
+'use strict';
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const expect = chai.expect;
 const mongoose = require('mongoose');
 process.env.MONGOLAB_URI = 'mongodb://localhost/test/testDb';
-const server = require(__dirname + '/../server');
+const server = require(__dirname + '/../server'); //eslint-disable-line
 const Movie = require(__dirname + '/../app/models/movie');
 
 describe('The Movie API', () => {
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       done();
-    })
+    });
 
   });
 
@@ -37,10 +39,10 @@ describe('The Movie API', () => {
       Movie.create({
         title: 'test movie',
         genre: 'test genre'
-      }, (err, data) => {
+      }, (err, data) => { //eslint-disable-line
         this.testMovie = data;
         done();
-      })
+      });
     });
 
     it('GET should be able to retreive our movies', (done) => {
@@ -64,7 +66,7 @@ describe('The Movie API', () => {
           expect(res).to.have.status(200);
           expect(res.body.msg).to.eql('Successful PUT');
           done();
-        })
+        });
     });
 
     it('DELETE should be able to delete a movie', (done) => {
@@ -75,7 +77,7 @@ describe('The Movie API', () => {
           expect(res.body.msg).to.eql('Successful DELETE');
           expect(res).to.have.status(200);
           done();
-        })
+        });
     });
   });
 });
