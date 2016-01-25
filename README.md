@@ -103,4 +103,3 @@ Javascript 401 course at Code Fellows.
 ## License
 
 This project is licensed under the terms of the MIT license.
-
