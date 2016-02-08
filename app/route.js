@@ -23,7 +23,7 @@ module.exports = exports = router
     }
   } else {
     this.body = {
-      title: "An event with that name already exists"
+      title: "A movie with that name already exists"
     }
   }
 })
@@ -33,12 +33,12 @@ module.exports = exports = router
   delete newData._id;
   var updated = yield Movie.update({
     title: this.params.title
-  });
+  }, newData);  //newData represents changes
   this.body = {
     msg: 'Successful PUT'
   };
-
 })
+
 // Delete Movie based on title
 .delete('/movie/:title', function * () {
   var deleted = yield Movie.remove({

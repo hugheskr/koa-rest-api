@@ -1,26 +1,36 @@
-'use strict';
+const gulp = require('gulp'),
+      eslint = require('gulp-eslint'),
+      mocha = require('gulp-mocha'),
+      files = ['test/*.js', '!node_modules//**',__dirname + '/../lib/*.js'];
 
-const gulp = require('gulp');
-const eslint = require('gulp-eslint');
-const mocha = require('gulp-mocha');
-
-var files = ['index.js', 'gulpfile.js', './lib/*.js', './test/*.js',
- '!node_modules/**', '!*.json'];
-
-gulp.task('lint', () => {
+gulp.task('lint', function() {
   return gulp.src(files)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint({
+      extends: 'eslint:recommended', // imports general rules
+      ecmaFeatures: {
+        'modules': true,        // allows modules
+        'blockBindings': true,  // allows const
+        'arrowFunctions': true  // allows arrow functions
+      },
+      'rules': {
+        'no-console': 0,       // allows console.logs without throwing err
+        'semi': 2,             // requires semi-colons
+      },
+      envs: [
+        'node',
+        'mocha'
+      ]
+    }))
+    .pipe(eslint.format());
 });
 
-gulp.task('mocha', () => {
-  return gulp.src('test/*.js')
+gulp.task('mocha', function() {
+  return gulp.src(['test/*.js'], { read: false })
     .pipe(mocha({ reporter: 'nyan' }));
 });
 
-gulp.task('watch', () => {
-  return gulp.watch(files, ['lint', 'mocha']);
+gulp.task('watch', function() {
+  gulp.watch(files, ['lint']);
 });
 
-gulp.task('default', ['watch', 'lint', 'mocha']);
+gulp.task('default', ['mocha', 'lint', 'watch']);
